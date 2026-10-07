@@ -1,1 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlantis AI Kingdom | Official Portal</title>
+    <style>
+        :root {
+            --bg-color: #080c14;
+            --card-bg: #0f172a;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --cyan: #00f0ff;
+            --text-color: #e2e8f0;
+            --text-dim: #94a3b8;
+            --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+        /* Background Glow Effects */
+        .glow-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0,240,255,0.05) 0%, rgba(212,175,55,0.05) 40%, rgba(8,12,20,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header Navigation */
+        header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .logo-eye {
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 5px var(--gold));
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--cyan);
+        }
+
+        /* Main Hero Section */
+        main {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .tagline {
+            display: inline-block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--cyan);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.description {
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Access Console Card */
+        .portal-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.1);
+            text-align: left;
+        }
+
+        .portal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .portal-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #10b981;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background-color: var(--bg-color);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
+            padding: 14px 18px;
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+
+        .btn-enter {
+            background: linear-gradient(135deg, var(--gold) 0%, #b89228 100%);
+            color: var(--bg-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .btn-enter:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+
+        .console-output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--cyan);
+            min-height: 50px;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .input-group { flex-direction: column; }
+            .btn-enter { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-bg"></div>
+
+    <header>
+        <div class="logo">
+            <span class="logo-eye">👁️</span>
+            <span>Atlantis AI</span>
+        </div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#access">Access</a>
+            <a href="#governance">Governance</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="tagline">The Digital Sovereign Realm</div>
+        <h1>Atlantis AI Kingdom</h1>
+        <p class="description">
+            Bridging ancient wisdom with future artificial intelligence. Enter the sovereign portal to interact with the kingdom's core intelligence.
+        </p>
+
+        <div class="portal-card" id="access">
+            <div class="portal-header">
+                <span class="portal-title">Sovereign Portal Terminal</span>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span>AI Core Active</span>
+                </div>
+            </div>
+
+            <label for="prompt-input" style="font-size: 0.9rem; color: var(--text-dim);">Enter your access query or command:</label>
+            <div class="input-group">
+                <input type="text" id="prompt-input" placeholder="e.g. Request audience with Atlantis AI..." />
+                <button class="btn-enter" onclick="sendPrompt()">Enter Realm</button>
+            </div>
+
+            <div class="console-output" id="console-output">
+                > System initialized. Ready for user query...
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Atlantis AI Kingdom. All sovereign rights reserved.
+    </footer>
+
+    <script>
+        function sendPrompt() {
+            const input = document.getElementById('prompt-input');
+            const output = document.getElementById('console-output');
+            const query = input.value.trim();
+
+            if (!query) {
+                output.innerText = "> Please enter a command or query to proceed.";
+                return;
+            }
+
+            output.innerText = `> Processing query: "${query}"...\n> Connecting to Atlantis AI Core...\n> Access granted to sovereign archive. Welcome citizen.`;
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
